@@ -34,7 +34,7 @@ Reference.prototype.get_generarPdf = function (req, res, next) {
             page.property('paperSize', {
                 format: 'A4'
             }).then(function () {
-            page.open("http://192.168.20.89:4430/api/reference/getDetalleReferenciaById?idReferencia=" + req.query.idReferencia).then(function (status) {
+            page.open("http://192.168.20.9:4430/api/reference/getDetalleReferenciaById?idReferencia=" + req.query.idReferencia).then(function (status) {
                 page.render('Reporte_90.pdf').then(function () {
                     page.close();
                     ph.exit();
