@@ -71,7 +71,7 @@ Reference.prototype.get_facturasEmp = function (req, res, next) {
     var self = this;
 
     var params = [{name: 'idCliente',value: req.query.idCliente,type: self.model.types.INT},
-          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}    
+          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}
     ];
 
     this.model.query('SEL_TOTAL_FACTURAS_TODOS_EMPRESAS_SP', params, function (error, result) {
@@ -87,7 +87,7 @@ Reference.prototype.get_facturasIdDocEmp = function (req, res, next) {
     var self = this;
 
     var params = [{name: 'idDocumento',value: req.query.idDocumento,type: self.model.types.STRING},
-          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}    
+          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}
     ];
 
     this.model.query('SEL_TOTAL_FACTURAS_TODOS_IDDOC_EMPRESA__SP', params, function (error, result) {
@@ -103,7 +103,7 @@ Reference.prototype.get_pedidoIdDocEmp = function (req, res, next) {
     var self = this;
 
     var params = [{name: 'idDocumento',value: req.query.idDocumento,type: self.model.types.STRING},
-          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}    
+          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}
     ];
 
     this.model.query('SEL_TOTAL_PEDIDOS_TODOS__IDDOC_EMPRESA_SP', params, function (error, result) {
@@ -119,7 +119,7 @@ Reference.prototype.get_cotizacionIdDocEmp = function (req, res, next) {
     var self = this;
 
     var params = [{name: 'idDocumento',value: req.query.idDocumento,type: self.model.types.STRING},
-          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}    
+          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}
     ];
 
     this.model.query('SEL_TOTAL_COTIZACIONES_TODAS_IDDOC_EMPRESAS__SP', params, function (error, result) {
@@ -182,7 +182,7 @@ Reference.prototype.get_pedidosEmp = function (req, res, next) {
     var self = this;
 
     var params = [{name: 'idCliente',value: req.query.idCliente,type: self.model.types.INT},
-          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}    
+          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}
     ];
 
     this.model.query('SEL_TOTAL_PEDIDOS_TODOS_EMPRESA_SP', params, function (error, result) {
@@ -287,7 +287,7 @@ Reference.prototype.get_cotizacionEmp = function (req, res, next) {
     var self = this;
 
     var params = [{name: 'idCliente',value: req.query.idCliente,type: self.model.types.INT},
-          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}    
+          {name: 'idEmpresas',value: req.query.idEmpresas,type: self.model.types.INT}
     ];
 
     this.model.query('SEL_TOTAL_COTIZACIONES_TODAS_EMPRESAS_SP', params, function (error, result) {
@@ -480,7 +480,7 @@ Reference.prototype.get_docReference = function (req, res, next) {
         self.view.expositor(res, {
             error: error,
             result: result
-        }//,res.render('contrato.html', result[0]) 
+        }//,res.render('contrato.html', result[0])
                            );
     });
 };
@@ -491,7 +491,7 @@ Reference.prototype.get_referenceWS = function (req, res, next) {
    //Retorna {p1:'a',p2:'b'}
    //Objeto que envía los parámetros
    //var params = [];
-   //Referencia a la clase para callback  
+   //Referencia a la clase para callback
    var self = this;
    var params = []
    if (req.query.serie, req.query.folio) {
@@ -552,7 +552,7 @@ Reference.prototype.get_referenceWS = function (req, res, next) {
                        err: err,
                        result:data
                    });
-                   
+
                    if (err) {
                        console.log('Error 1')
                    } else {
@@ -605,9 +605,9 @@ Reference.prototype.post_addDetailsReference = function(req, res, next) {
 }
 
 function getReferenceFromWS(url, idEmpresa, idSucursal,idDepartamento, idTipoDocumento, serie, folio, idCliente,idAlma, importeDocumento,idTipoReferencia, cb) {
-   request.get(url + "?idEmpresa=" + idEmpresa + "&idSucursal=" + idSucursal + "&idDepartamento=" + idDepartamento 
-    + "&idTipoDocumento=" + idTipoDocumento + "&serie=" + serie + "&folio="+ folio +"&idCliente=" + idCliente 
-    +"&idAlma="+ idAlma + "&importeDocumento="+importeDocumento+"&idTipoReferencia="+idTipoReferencia, 
+   request.get(url + "?idEmpresa=" + idEmpresa + "&idSucursal=" + idSucursal + "&idDepartamento=" + idDepartamento
+    + "&idTipoDocumento=" + idTipoDocumento + "&serie=" + serie + "&folio="+ folio +"&idCliente=" + idCliente
+    +"&idAlma="+ idAlma + "&importeDocumento="+importeDocumento+"&idTipoReferencia="+idTipoReferencia,
     function (error, response, body) {
        if (!error && response.statusCode == 200) {
            body = JSON.parse(body);
@@ -635,14 +635,33 @@ Reference.prototype.get_getDetalleReferenciaById = function(req, res, next) {
             name: 'tipoReferencia',
             value: result[0].tipoReferencia,
             type: self.model.types.INT
-        }]
+        }];
         self.model.query('SEL_LEYENDAS_PDF_SP', params2, function (error, leyendas) {
             self.model.query('SEL_DETALLE_REFERENCIA_TOTAL_PAGO_SP', params, function (error, pago) {
-            res.render('referencia2.html',{referencias:result, leyendas:leyendas , pago:pago});
+                var params3 = [{name: 'idEmpresa', value: result[0].idEmpresa, type: self.model.types.INT }];
+                self.model.query('SEL_CUENTA_BANCO_REFERENCIA_SP', params3, function (error, cuentas){
+                      var cuentasTotales = cuentas;
+                      var cuentaBanamex = {};
+                      var cuentaBancomer = {};
+                      var cuentaSantander = {};
+                    cuentasTotales.forEach(function(item){
+                      switch(item.idBanco) {
+                            case 1:
+                                cuentaBancomer = item;
+                                break;
+                            case 2:
+                                cuentaBanamex = item;
+                                break;
+                            case 3:
+                                cuentaSantander = item;
+                                break;
+                            }
+                    });
+                    res.render('referencia2.html',{referencias:result, leyendas:leyendas , pago:pago, cuentaBancomer: cuentaBancomer, cuentaBanamex: cuentaBanamex, cuentaSantander: cuentaSantander});
+                });
             });
         });
     });
 };
 
 module.exports = Reference;
-
